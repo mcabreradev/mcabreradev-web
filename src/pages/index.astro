@@ -303,16 +303,6 @@ const button =
                     <StatCard stat={stat} />
                   ))
                 }
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- Professional experience -->
-        <section id="experience" class={section}>
-          <div
-            class="scroll-reveal mb-12 grid gap-6 md:grid-cols-[1fr_2fr] md:gap-10"
-          >
             <div>
               <p class={eyebrow}>
                 {experience.eyebrow}
@@ -414,9 +404,9 @@ const button =
 
           <div class="grid grid-cols-1 gap-[18px] md:grid-cols-2">
             {
-              {projects.map((project) => (
+              projects.map((project) => (
                 <ProjectCard project={project} />
-              ))}
+              ))
             }
           </div>
 
@@ -496,26 +486,11 @@ const button =
 
         <!-- Contact -->
         <section id="contact" class="py-20 md:pb-20 md:pt-28">
-          <div
-            class="scroll-reveal relative overflow-hidden rounded-2xl bg-purple-accent p-7 text-[#211b2c] md:p-16"
-          >
-            <span
-              aria-hidden="true"
-              class="pointer-events-none absolute right-3 top-0 text-[8rem] leading-none opacity-15 md:right-14 md:text-[13rem]"
-            >
-              ✳
-            </span>
-
-            <div class="relative z-10">
-              <p
-                class="text-sm font-bold uppercase tracking-[0.14em] text-[#4c3d67]"
-              >
-                {contact.eyebrow}
-              </p>
-
-              <h2
-                class="mt-4 max-w-[730px] font-display text-[clamp(3rem,6vw,6rem)] font-semibold leading-none tracking-[-0.065em]"
-              >
+            {
+              expertise.groups.map((group, index) => (
+                <ExpertiseGroup group={group} index={index} />
+              ))
+            }
                 {contact.title}
               </h2>
 
