@@ -1,0 +1,99 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap");
+
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "DM Sans", sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+
+  --color-background: #11141a;
+  --color-surface: #1a1e25;
+  --color-foreground: #f2f1ec;
+  --color-muted: #aaadb4;
+  --color-lime-accent: #d9fb6c;
+  --color-purple-accent: #c3b1ff;
+  --color-border: #373b42;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background font-sans text-foreground antialiased;
+  }
+
+  a:focus-visible {
+    @apply outline-2 outline-offset-4 outline-lime-accent;
+  }
+
+  ::selection {
+    @apply bg-lime-accent text-background;
+  }
+}
+
+/* Hero: el contenido permanece visible sin animaciones. */
+
+@keyframes hero-entrance {
+  from {
+    transform: translateY(20px);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .animate-entrance {
+    animation: hero-entrance 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .animate-entrance-delayed {
+    animation: hero-entrance 900ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .interactive-link {
+    transition:
+      color 200ms ease,
+      background-color 200ms ease,
+      border-color 200ms ease,
+      transform 200ms ease,
+      box-shadow 200ms ease;
+  }
+
+  .interactive-link:hover {
+    transform: translateY(-2px);
+  }
+
+  .interactive-link:active {
+    transform: translateY(0);
+  }
+
+  .project-card {
+    transition:
+      transform 280ms cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 280ms ease,
+      border-color 280ms ease;
+  }
+
+  .project-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 45px rgb(0 0 0 / 18%);
+  }
+
+  .portrait-image {
+    transition: transform 650ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .portrait:hover .portrait-image {
+    transform: scale(1.04);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}

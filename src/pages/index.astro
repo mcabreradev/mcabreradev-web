@@ -1,16 +1,684 @@
 ---
+import "../styles/global.css";
+import { portfolio } from "../data/portfolio";
+
+const {
+  personal,
+  navigation,
+  hero,
+  specialties,
+  about,
+  experience,
+  projectsSection,
+  projects,
+  ai,
+  expertise,
+  contact,
+  socialLinks,
+  seo,
+} = portfolio;
+
+const currentYear = new Date().getFullYear();
+
+const themes = {
+  lime: "border-lime-accent bg-lime-accent text-[#172011]",
+  purple: "border-purple-accent bg-purple-accent text-[#272036]",
+  dark: "border-[#3c4149] bg-surface text-foreground",
+};
+
+const container = "mx-auto w-[90%] max-w-[1200px]";
+
+const section = "border-b border-border py-20 md:py-28";
+
+const eyebrow =
+  "text-[0.8rem] font-bold uppercase tracking-[0.14em] text-lime-accent";
+
+const heading =
+  "font-display text-[clamp(2.7rem,5vw,4.8rem)] font-semibold leading-[1.07] tracking-[-0.055em]";
+
+const button =
+  "interactive-link inline-flex min-h-[51px] items-center justify-center rounded-[7px] border px-6 text-[0.95rem] font-bold";
 ---
 
+<!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+
+    <meta name="theme-color" content="#11141a" />
+
+    <title>{seo.title}</title>
+
+    <meta name="description" content={seo.description} />
+
+    <meta property="og:title" content={seo.title} />
+
+    <meta property="og:description" content={seo.description} />
+
+    <meta property="og:type" content="website" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin="anonymous"
+    />
+
+    {
+      Astro.site && (
+        <link
+          rel="canonical"
+          href={new URL(Astro.url.pathname, Astro.site)}
+        />
+      )
+    }
+  </head>
+
+  <body>
+    <a
+      href="#main"
+      class="sr-only z-50 rounded bg-lime-accent px-4 py-2 font-bold text-background focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
+    >
+      Skip to content
+    </a>
+
+    <!-- Header -->
+    <header class={container}>
+      <nav
+        aria-label="Main navigation"
+        class="flex items-center justify-between gap-5 border-b border-border py-6"
+      >
+        <a
+          href="#top"
+          aria-label={`${personal.name} home`}
+          class="interactive-link font-display text-2xl font-bold tracking-[-0.06em]"
+        >
+          {personal.initials}<span class="text-lime-accent">.</span>
+        </a>
+
+        <div class="flex items-center gap-8 text-sm text-[#d2d3d4]">
+          {
+            navigation.map((item) => (
+              <a
+                href={item.href}
+                class="interactive-link hidden hover:text-lime-accent md:block"
+              >
+                {item.label}
+              </a>
+            ))
+          }
+
+          <a
+            href="#contact"
+            class="interactive-link rounded-full border border-[#69706a] px-5 py-2 hover:border-lime-accent hover:text-lime-accent"
+          >
+            Let's talk
+          </a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="main">
+      <!-- Hero -->
+      <div class={container}>
+        <section
+          id="top"
+          class="grid items-center gap-10 py-20 md:min-h-[635px] md:grid-cols-[1.35fr_0.65fr] md:py-24"
+        >
+          <div class="animate-entrance">
+            <p class={eyebrow}>
+              {personal.role} · {personal.location}
+            </p>
+
+            <h1
+              class="mt-6 font-display text-[clamp(3.6rem,7.5vw,7rem)] font-semibold leading-[0.99] tracking-[-0.065em]"
+            >
+              {hero.title}
+
+              <br />
+
+              <span class="text-lime-accent">
+                {hero.highlightedTitle}
+              </span>
+            </h1>
+
+            <p
+              class="mt-6 max-w-[580px] text-lg leading-relaxed text-[#c1c3c6]"
+            >
+              {hero.description}
+            </p>
+
+            <div class="mt-8 flex flex-wrap gap-3.5">
+              <a
+                href={hero.primaryAction.href}
+                class={`${button} border-transparent bg-lime-accent text-[#151910] hover:bg-[#ebffad]`}
+              >
+                {hero.primaryAction.label}
+              </a>
+
+              <a
+                href={hero.secondaryAction.href}
+                class={`${button} border-[#5c6067] bg-transparent text-foreground hover:bg-[#292e36]`}
+              >
+                {hero.secondaryAction.label}
+              </a>
+            </div>
+          </div>
+
+          <!-- Foto o placeholder -->
+          <div
+            class="portrait animate-entrance-delayed relative mx-auto grid h-[300px] w-full max-w-[380px] place-items-center overflow-hidden rounded-t-[200px] rounded-b-2xl bg-purple-accent md:h-[420px]"
+          >
+            {
+              personal.photo ? (
+                <img
+                  src={personal.photo}
+                  alt={personal.photoAlt}
+                  width="380"
+                  height="420"
+                  class="portrait-image h-full w-full object-cover"
+                />
+              ) : (
+                <>
+                  <div
+                    aria-hidden="true"
+                    class="absolute h-[290px] w-[290px] rounded-full border border-[#6f629a]"
+                  />
+
+                  <div
+                    aria-hidden="true"
+                    class="absolute h-[220px] w-[220px] rounded-full border border-[#6f629a]"
+                  />
+
+                  <span
+                    aria-hidden="true"
+                    class="relative z-10 -ml-3 font-display text-[6rem] font-bold tracking-[-0.12em] text-[#29243c] md:text-[8rem]"
+                  >
+                    {personal.initials}.
+                  </span>
+
+                  <span
+                    class="absolute bottom-6 left-6 text-xs font-bold uppercase tracking-[0.12em] text-[#393052]"
+                  >
+                    Portrait coming soon
+                  </span>
+                </>
+              )
+            }
+          </div>
+        </section>
+      </div>
+
+      <!-- Specialties -->
+      <div class="border-y border-border py-6">
+        <div
+          class={`${container} flex flex-wrap justify-between gap-x-8 gap-y-4 font-display text-sm font-semibold uppercase tracking-wide text-[#c9cbd0]`}
+        >
+          {
+            specialties.map((specialty) => (
+              <div>
+                <span
+                  aria-hidden="true"
+                  class="mr-2.5 text-lime-accent"
+                >
+                  ✳
+                </span>
+
+                {specialty}
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <div class={container}>
+        <!-- About -->
+        <section id="about" class={section}>
+          <div
+            class="scroll-reveal grid gap-7 md:grid-cols-[1fr_2fr] md:gap-10"
+          >
+            <div>
+              <p class={eyebrow}>
+                {about.eyebrow}
+              </p>
+            </div>
+
+            <div>
+              <h2 class={heading}>
+                {about.title}
+              </h2>
+
+              <div
+                class="mt-7 max-w-[740px] space-y-5 text-lg leading-relaxed md:text-xl"
+              >
+                {
+                  about.paragraphs.map((paragraph, index) => (
+                    <p
+                      class={
+                        index === 0
+                          ? "text-[#d7d8d8]"
+                          : "text-muted"
+                      }
+                    >
+                      {paragraph}
+                    </p>
+                  ))
+                }
+              </div>
+
+              <div class="mt-11 flex flex-wrap gap-10 md:gap-16">
+                {
+                  about.stats.map((stat) => (
+                    <div>
+                      <strong
+                        class="block font-display text-[2.7rem] font-semibold tracking-[-0.05em] text-lime-accent"
+                      >
+                        {stat.value}
+                      </strong>
+
+                      <span class="text-sm text-muted">
+                        {stat.label}
+                      </span>
+                    </div>
+                  ))
+                }
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Professional experience -->
+        <section id="experience" class={section}>
+          <div
+            class="scroll-reveal mb-12 grid gap-6 md:grid-cols-[1fr_2fr] md:gap-10"
+          >
+            <div>
+              <p class={eyebrow}>
+                {experience.eyebrow}
+              </p>
+            </div>
+
+            <div>
+              <h2 class={heading}>
+                {experience.title}
+              </h2>
+
+              <p
+                class="mt-6 max-w-[700px] text-lg leading-relaxed text-muted"
+              >
+                {experience.description}
+              </p>
+            </div>
+          </div>
+
+          <div class="md:ml-[33.333%]">
+            {
+              experience.roles.map((job) => (
+                <article class="scroll-reveal border-t border-border py-9">
+                  <div
+                    class="flex flex-col gap-2 md:flex-row md:items-start md:justify-between"
+                  >
+                    <div>
+                      <h3
+                        class="font-display text-2xl font-semibold tracking-tight"
+                      >
+                        {job.role}
+                      </h3>
+
+                      <p class="mt-1 font-medium text-lime-accent">
+                        {job.company}
+                      </p>
+                    </div>
+
+                    <p class="text-sm text-muted">
+                      {job.period} · {job.location}
+                    </p>
+                  </div>
+
+                  <p
+                    class="mt-5 max-w-[700px] leading-relaxed text-[#d7d8d8]"
+                  >
+                    {job.summary}
+                  </p>
+
+                  <ul class="mt-5 list-disc space-y-2 pl-5 text-muted">
+                    {
+                      job.highlights.map((highlight) => (
+                        <li class="leading-relaxed">
+                          {highlight}
+                        </li>
+                      ))
+                    }
+                  </ul>
+
+                  <div
+                    aria-label="Technologies"
+                    class="mt-6 flex flex-wrap gap-2"
+                  >
+                    {
+                      job.technologies.map((technology) => (
+                        <span
+                          class="rounded-full border border-border px-3 py-1 text-xs text-[#c7c8ca]"
+                        >
+                          {technology}
+                        </span>
+                      ))
+                    }
+                  </div>
+                </article>
+              ))
+            }
+          </div>
+        </section>
+
+        <!-- Projects -->
+        <section id="projects" class={section}>
+          <div
+            class="scroll-reveal mb-11 flex flex-col gap-5 md:flex-row md:items-end md:justify-between"
+          >
+            <div>
+              <p class={eyebrow}>
+                {projectsSection.eyebrow}
+              </p>
+
+              <h2 class={`${heading} mt-3.5`}>
+                {projectsSection.title}
+              </h2>
+            </div>
+
+            <p class="max-w-[360px] leading-relaxed text-muted">
+              {projectsSection.description}
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 gap-[18px] md:grid-cols-2">
+            {
+              projects.map((project) => (
+                <article
+                  class:list={[
+                    "project-card scroll-reveal flex min-h-[320px] flex-col rounded-xl border p-8",
+                    themes[project.theme] ?? themes.dark,
+                  ]}
+                >
+                  <p
+                    class="text-xs font-bold uppercase tracking-[0.12em] opacity-70"
+                  >
+                    {project.category}
+                  </p>
+
+                  <h3
+                    class="mt-7 font-display text-[2rem] font-semibold leading-[1.1] tracking-[-0.05em]"
+                  >
+                    {project.title}
+                  </h3>
+
+                  <p
+                    class="mt-3 max-w-[470px] leading-relaxed opacity-85"
+                  >
+                    {project.description}
+                  </p>
+
+                  <div
+                    class="mt-auto flex flex-wrap items-end justify-between gap-4 pt-7 text-sm"
+                  >
+                    <span class="font-semibold opacity-75">
+                      {project.tags.join(" · ")}
+                    </span>
+
+                    {project.links.length > 0 && (
+                      <div class="flex flex-wrap gap-4">
+                        {project.links.map((link) => (
+                          <a
+                            href={link.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="interactive-link font-bold underline underline-offset-4"
+                          >
+                            {link.label}
+
+                            <span class="sr-only">
+                              {" "}(opens in a new tab)
+                            </span>
+                          </a>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </article>
+              ))
+            }
+          </div>
+
+          <p class="scroll-reveal mt-7 text-muted">
+            {projectsSection.note}
+          </p>
+        </section>
+
+        <!-- AI and agents -->
+        <section id="ai" class={section}>
+          <div
+            class="scroll-reveal grid gap-7 rounded-2xl border border-[#4b4660] bg-[#211e2a] p-7 md:grid-cols-2 md:gap-12 md:p-14"
+          >
+            <div>
+              <p class={eyebrow}>
+                {ai.eyebrow}
+              </p>
+
+              <h2 class={`${heading} mt-4`}>
+                {ai.title}
+              </h2>
+            </div>
+
+            <div>
+              <p class="text-lg leading-relaxed text-[#e5e1ef]">
+                {ai.introduction}
+              </p>
+
+              <p class="mt-5 leading-relaxed text-muted">
+                {ai.description}
+              </p>
+
+              <ul class="mt-6 list-disc space-y-3 pl-5 text-[#c8c5d2]">
+                {
+                  ai.topics.map((topic) => (
+                    <li>{topic}</li>
+                  ))
+                }
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- Expertise -->
+        <section
+          id="expertise"
+          class={`${section} grid gap-8 md:grid-cols-[1fr_2fr] md:gap-10`}
+        >
+          <div class="scroll-reveal">
+            <p class={eyebrow}>
+              {expertise.eyebrow}
+            </p>
+
+            <h2 class={`${heading} mt-4`}>
+              {expertise.title}
+            </h2>
+          </div>
+
+          <div class="scroll-reveal">
+            {
+              expertise.groups.map((group, index) => (
+                <div
+                  class:list={[
+                    "grid gap-2 border-b border-border py-6 md:grid-cols-[170px_1fr] md:gap-5",
+                    { "pt-0": index === 0 },
+                  ]}
+                >
+                  <strong
+                    class="font-display font-semibold text-lime-accent"
+                  >
+                    {group.name}
+                  </strong>
+
+                  <span class="leading-relaxed text-[#c7c8ca]">
+                    {group.technologies.join(", ")}
+                  </span>
+                </div>
+              ))
+            }
+          </div>
+        </section>
+
+        <!-- Contact -->
+        <section id="contact" class="py-20 md:pb-20 md:pt-28">
+          <div
+            class="scroll-reveal relative overflow-hidden rounded-2xl bg-purple-accent p-7 text-[#211b2c] md:p-16"
+          >
+            <span
+              aria-hidden="true"
+              class="pointer-events-none absolute right-3 top-0 text-[8rem] leading-none opacity-15 md:right-14 md:text-[13rem]"
+            >
+              ✳
+            </span>
+
+            <div class="relative z-10">
+              <p
+                class="text-sm font-bold uppercase tracking-[0.14em] text-[#4c3d67]"
+              >
+                {contact.eyebrow}
+              </p>
+
+              <h2
+                class="mt-4 max-w-[730px] font-display text-[clamp(3rem,6vw,6rem)] font-semibold leading-none tracking-[-0.065em]"
+              >
+                {contact.title}
+              </h2>
+
+              <p class="mt-6 max-w-[520px] text-lg leading-relaxed">
+                {contact.description}
+              </p>
+
+              <div class="mt-8 flex flex-wrap gap-3.5">
+                <a
+                  href={`mailto:${personal.email}`}
+                  class={`${button} border-transparent bg-[#211b2c] text-white hover:bg-[#393044]`}
+                >
+                  {contact.buttonLabel}
+                </a>
+
+                <a
+                  href={contact.secondaryAction.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class={`${button} border-[#514463] bg-transparent text-[#211b2c] hover:bg-white/20`}
+                >
+                  {contact.secondaryAction.label}
+
+                  <span class="sr-only">
+                    {" "}(opens in a new tab)
+                  </span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class={container}>
+      <div
+        class="flex flex-col justify-between gap-4 py-7 text-sm text-muted md:flex-row"
+      >
+        <p>
+          © {currentYear} {personal.name}. Built with intention.
+        </p>
+
+        <div class="flex flex-wrap gap-6">
+          {
+            socialLinks.map((link) => (
+              <a
+                href={link.href}
+                target={link.external ? "_blank" : undefined}
+                rel={
+                  link.external
+                    ? "noopener noreferrer"
+                    : undefined
+                }
+                class="interactive-link hover:text-lime-accent"
+              >
+                {link.label}
+
+                {link.external && (
+                  <span class="sr-only">
+                    {" "}(opens in a new tab)
+                  </span>
+                )}
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </footer>
+
+    <!--
+      El contenido es visible por defecto.
+      Las animaciones se agregan únicamente cuando JS está disponible.
+    -->
+    <script>
+      const reducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      );
+
+      const elements = document.querySelectorAll(".scroll-reveal");
+
+      if (
+        !reducedMotion.matches &&
+        "IntersectionObserver" in window
+      ) {
+        const observer = new IntersectionObserver(
+          (entries, currentObserver) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) {
+                return;
+              }
+
+              const element = entry.target;
+
+              element.animate(
+                [
+                  {
+                    opacity: 0,
+                    transform: "translateY(28px)",
+                  },
+                  {
+                    opacity: 1,
+                    transform: "translateY(0)",
+                  },
+                ],
+                {
+                  duration: 700,
+                  easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+                },
+              );
+
+              currentObserver.unobserve(element);
+            });
+          },
+          {
+            threshold: 0.12,
+          },
+        );
+
+        elements.forEach((element) => {
+          observer.observe(element);
+        });
+      }
+    </script>
+  </body>
 </html>
