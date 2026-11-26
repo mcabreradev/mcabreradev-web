@@ -21,8 +21,8 @@ const {
 const currentYear = new Date().getFullYear();
 
 const themes = {
-  lime: "border-lime-accent bg-lime-accent text-black",
-  purple: "border-purple-accent bg-purple-accent text-black",
+  lime: "border-lime-accent bg-lime-accent text-[#172011]",
+  purple: "border-purple-accent bg-purple-accent text-[#272036]",
   dark: "border-[#3c4149] bg-surface text-foreground",
 };
 
@@ -31,7 +31,7 @@ const container = "mx-auto w-[90%] max-w-[1200px]";
 const section = "border-b border-border py-20 md:py-28";
 
 const eyebrow =
-  "text-lg font-bold uppercase tracking-[0.14em] text-black";
+  "text-[0.8rem] font-bold uppercase tracking-[0.14em] text-lime-accent";
 
 const heading =
   "font-display text-[clamp(2.7rem,5vw,4.8rem)] font-semibold leading-[1.07] tracking-[-0.055em]";
@@ -41,7 +41,7 @@ const button =
 ---
 
 <!doctype html>
-<html lang="en" class="">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
 
@@ -119,7 +119,7 @@ const button =
           aria-label={`${personal.name} home`}
           class="interactive-link font-display text-2xl font-bold tracking-[-0.06em]"
         >
-          {personal.initials}<span class="text-black">.</span>
+          {personal.initials}<span class="text-lime-accent">.</span>
         </a>
 
         <div class="flex items-center gap-8 text-sm text-[#d2d3d4]">
@@ -127,25 +127,18 @@ const button =
             navigation.map((item) => (
               <a
                 href={item.href}
-                class="interactive-link hidden hover:text-black md:block"
+                class="interactive-link hidden hover:text-lime-accent md:block"
               >
                 {item.label}
               </a>
             ))
           }
           
-          <a
-            id="theme-toggle"
-            href="#"
-            class="interactive-link rounded-full border border-[#69706a] px-5 py-2 hover:border-lime-accent hover:text-black"
-            aria-label="Toggle dark theme"
-          >
-            🌙
-          </a>
+
 
           <a
             href="#contact"
-            class="interactive-link rounded-full border border-[#69706a] px-5 py-2 hover:border-lime-accent hover:text-black"
+            class="interactive-link rounded-full border border-[#69706a] px-5 py-2 hover:border-lime-accent hover:text-lime-accent"
           >
             Let's talk
           </a>
@@ -658,7 +651,7 @@ const button =
                     ? "noopener noreferrer"
                     : undefined
                 }
-                class="interactive-link hover:text-black"
+                class="interactive-link hover:text-lime-accent"
               >
                 {link.label}
 
@@ -728,31 +721,7 @@ const button =
         });
       }
     </script>
-    <script>
-      // Theme toggle functionality
-      const themeToggle = document.getElementById('theme-toggle');
-      const htmlElement = document.documentElement;
-      const getCurrentTheme = () => {
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme) return savedTheme;
-        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-      };
-      const setTheme = (theme) => {
-        if (theme === 'dark') {
-          htmlElement.classList.add('dark');
-        } else {
-          htmlElement.classList.remove('dark');
-        }
-        localStorage.setItem('theme', theme);
-        themeToggle.innerHTML = theme === 'dark' ? '☀️' : '🌙';
-      };
-      setTheme(getCurrentTheme());
-      themeToggle.addEventListener('click', (e) => {
-        e.preventDefault();
-        const isDark = htmlElement.classList.contains('dark');
-        setTheme(isDark ? 'light' : 'dark');
-      });
-    </script>
+
     <!-- Agent Demo Script -->
     <script>
       const btn = document.getElementById('agent-demo');

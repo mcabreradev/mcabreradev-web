@@ -6,17 +6,6 @@
   --font-sans: "DM Sans", sans-serif;
   --font-display: "Space Grotesk", sans-serif;
 
-  --color-background: #fafafa;
-  --color-surface: #ffffff;
-  --color-foreground: #11141a;
-  --color-muted: #666666;
-  --color-lime-accent: #558b2f;
-  --color-purple-accent: #6a1b9a;
-  --color-border: #e0e0e0;
-}
-
-/* Dark theme overrides */
-.dark {
   --color-background: #11141a;
   --color-surface: #1a1e25;
   --color-foreground: #f2f1ec;
