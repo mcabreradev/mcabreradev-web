@@ -1,43 +1,95 @@
-# Astro Starter Kit: Minimal
+# Miguelángel Cabrera - Portfolio
 
-```sh
-bun create astro@latest -- --template minimal
-```
+Personal portfolio website showcasing my experience, projects, and skills as a Senior Software Engineer.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+![Screenshot](./public/favicon.svg) <!-- optional -->
 
-## 🚀 Project Structure
+## 📋 Table of Contents
+- [Overview](#overview)
+- [Tech Stack](#tech-stack)
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Deployment](#deployment)
+- [License](#license)
+- [Contact](#contact)
 
-Inside of your Astro project, you'll see the following folders and files:
+## Overview
+This site is built with [Astro](https://astro.build) and Tailwind CSS, presenting a clean, responsive layout with sections for:
+- About me
+- Professional experience
+- Selected open‑source and personal projects
+- AI & agentic engineering experiments
+- Expertise and toolkit
+- Contact information
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+The content is driven from a single data file (`src/data/portfolio.js`) making it easy to maintain and extend.
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Tech Stack
+| Category      | Technology               |
+|---------------|--------------------------|
+| Framework     | Astro ^7.4.13            |
+| Styling       | Tailwind CSS ^4.3.5      |
+| Fonts         | DM Sans, Space Grotesk (Google Fonts) |
+| Language      | TypeScript (via .astro)  |
+| Build Tool    | Vite (via Astro)         |
+| Package Manager | Bun                     |
+| Icons         | Custom favicons          |
+| Animations    | CSS keyframes + IntersectionObserver |
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+## Features
+- Fully static site (no backend required)
+- Responsive design
+- Dark‑aware accent themes (lime, purple, dark)
+- Smooth scroll reveal animations
+- SEO meta tags (title, description, og)
+- Accessible skip‑to‑content link
+- Easy content updates via `portfolio.js`
 
-Any static assets, like images, can be placed in the `public/` directory.
+## Installation
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/mcabreradev/mcabreradev-web.git
+   cd mcabreradev-web
+   ```
+2. Install dependencies (Bun recommended):
+   ```bash
+   bun install
+   ```
+   *(If you don’t have Bun, you can use `npm install` – the lockfile is not committed.)*
 
-## 🧞 Commands
+## Usage
+- **Development server**
+  ```bash
+  bun dev
+  ```
+  Opens at <http://localhost:4321>
 
-All commands are run from the root of the project, from a terminal:
+- **Build for production**
+  ```bash
+  bun build
+  ```
+  Outputs static files to `./dist/`
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `bun install`             | Installs dependencies                            |
-| `bun dev`             | Starts local dev server at `localhost:4321`      |
-| `bun build`           | Build your production site to `./dist/`          |
-| `bun preview`         | Preview your build locally, before deploying     |
-| `bun astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `bun astro -- --help` | Get help using the Astro CLI                     |
+- **Preview production build**
+  ```bash
+  bun preview
+  ```
 
-## 👀 Want to learn more?
+## Deployment
+The repository is configured for GitHub Pages:
+1. Push to `main` (already done).
+2. In GitHub repo → Settings → Pages → Source: `main` branch `/root`.
+3. Site will be published at `https://mcabreradev.github.io/mcabreradev-web/`.
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Alternatively, deploy any static host (Netlify, Vercel, etc.) by pointing to the `dist/` folder.
+
+## License
+This project is open source and available under the [MIT License](LICENSE).
+
+## Contact
+- **Email**: mcabrera.dev@gmail.com
+- **LinkedIn**: [mcabreradev](https://www.linkedin.com/in/mcabreradev/)
+- **GitHub**: [mcabreradev](https://github.com/mcabreradev)
+
+© 2026 Miguelángel Cabrera. Built with intention.
