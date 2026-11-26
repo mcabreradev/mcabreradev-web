@@ -1,0 +1,44 @@
+---
+const { project } = Astro.props;
+
+const themes = {
+  lime: "border-lime-accent bg-lime-accent text-[#172011]",
+  purple: "border-purple-accent bg-purple-accent text-[#272036]",
+  dark: "border-[#3c4149] bg-surface text-foreground",
+};
+---
+<article
+  class:list={[
+    "project-card scroll-reveal flex min-h-[320px] flex-col rounded-xl border p-8",
+    themes[project.theme] ?? themes.dark,
+  ]}
+>
+  <p class="text-xs font-bold uppercase tracking-[0.12em] opacity-70">
+    {project.category}
+  </p>
+  <h3 class="mt-7 font-display text-[2rem] font-semibold leading-[1.1] tracking-[-0.05em]">
+    {project.title}
+  </h3>
+  <p class="mt-3 max-w-[470px] leading-relaxed opacity-85">
+    {project.description}
+  </p>
+  <div class="mt-auto flex flex-wrap items-end justify-between gap-4 pt-7 text-sm">
+    <span class="font-semibold opacity-75">
+      {project.tags.join(" · ")}
+    </span>
+    {project.links.length > 0 && (
+      <div class="flex flex-wrap gap-4">
+        {project.links.map((link) => (
+          <a
+            href={link.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="interactive-link font-bold underline underline-offset-4"
+          >
+            {link.label}
+          </a>
+        ))}
+      </div>
+    )}
+  </div>
+</article>

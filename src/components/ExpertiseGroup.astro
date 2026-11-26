@@ -1,0 +1,16 @@
+---
+const { group, index } = Astro.props;
+---
+<div
+  class:list={[
+    "grid gap-2 border-b border-border py-6 md:grid-cols-[170px_1fr] md:gap-5",
+    { "pt-0": index === 0 },
+  ]}
+>
+  <strong class="font-display font-semibold text-lime-accent">
+    {group.name}
+  </strong>
+  <span class="leading-relaxed text-[#c7c8ca]">
+    {group.technologies.join(", ")}
+  </span>
+</div>
