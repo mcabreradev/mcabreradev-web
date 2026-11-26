@@ -2,8 +2,6 @@
 
 Personal portfolio website showcasing my experience, projects, and skills as a Senior Software Engineer.
 
-![Screenshot](./public/favicon.svg) <!-- optional -->
-
 ## 📋 Table of Contents
 - [Overview](#overview)
 - [Tech Stack](#tech-stack)
